@@ -62,10 +62,12 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -117,7 +119,33 @@
     </div>
     
       
+        <form class="md-header__option" data-md-component="palette">
+  
     
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
@@ -729,7 +757,8 @@
 
 
 <h1>Jellyfin on a Raspberry Pi 4 - The Complete Setup</h1>
-<p><br>If you're like me, you have tons of music stored in Google Play Music.  So the September 2020 shutdown of Google Play Music was a real bummer to me.  Google allowed me to move my music to YouTube Music, but let's be real, YouTube Music is subpar at best.  I carry an Android smartphone, and on Android the YouTube Music app stops playing when you lock the screen unless you are paying customer.  So there's no going for a run with music, there's no walking the dogs with music, there's no driving with music, etc.  You get the picture.</p>
+<p><img alt="header" src="../../assets/images/jellyfin/music_guide.jpg" />
+<br>If you're like me, you have tons of music stored in Google Play Music.  So the September 2020 shutdown of Google Play Music was a real bummer to me.  Google allowed me to move my music to YouTube Music, but let's be real, YouTube Music is subpar at best.  I carry an Android smartphone, and on Android the YouTube Music app stops playing when you lock the screen unless you are paying customer.  So there's no going for a run with music, there's no walking the dogs with music, there's no driving with music, etc.  You get the picture.</p>
 <p>So I set out on a quest to find a replacement.  A lot of my friends really like Plex but I've tried Plex before and I didn't love it.  I spend a couple of weekends setting up Nextcloud but the music player was just not good, no, it is bad.  I had almost given up, then as I was listening to the Linux Unplugged podcast one afternoon in Dec they mentioned Jellyfin.  I thought to myself, could this be it?  Could this work?  </p>
 <p>I'm happy to report that this is the BEST I've seen so far and as of now I have it fully working.  I have Jellyfin running on my Raspberry Pi 4, with approximately 78 GB of music.  It is exposed via fully qualified domain so that I can listen from my phone or computer anywhere in the world with an internet connection.  It works on my browser, has and Android app and iOS app.  I have set up accounts for myself, my wife and my kids, so everyone can create their own playlists.</p>
 <p>Without further ado, let's hop in and go through the setup!</p>
@@ -752,44 +781,44 @@ sudo apt install jellyfin
 http://&lt;raspberry_pi_ip_address&gt;:8096
 </code></pre>
 <p>You will be greeeted with Jellyfin page!  Here you'll need to go through the setup process, the first still will be to choose the language and then click Next.</p>
-<p><img alt="" src="/media/uploads/2021/01/22/screen-shot-2021-01-21-at-101301-pm.png" /></p>
+<p><img alt="image" src="../../assets/images/jellyfin/screen-shot-2021-01-21-at-101301-pm.png" /></p>
 <p>Create a Username and Password, then click Next.</p>
-<p><img alt="" src="/media/uploads/2021/01/22/screen-shot-2021-01-21-at-101327-pm.png" /></p>
+<p><img alt="screenshot" src="../../assets/images/jellyfin/screen-shot-2021-01-21-at-101327-pm.png" /></p>
 <p>I won't go through every step, but will go through a few that are important.  Click Add Media Library and then you'll need to enter the path to your music (remember we mentioned you would need this path).</p>
-<p><img alt="" src="/media/uploads/2021/01/22/screen-shot-2021-01-21-at-101346-pm.png" /></p>
+<p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-21-at-101346-pm.png" /></p>
 <p>Enter the path to your music, then tab and scroll down.</p>
-<p><img alt="" src="/media/uploads/2021/01/22/screen-shot-2021-01-21-at-101430-pm.png" /></p>
+<p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-21-at-101430-pm.png" /></p>
 <p>When I first setup JellyFin I only selected MusicBrainz but didn't get all of my album art, song titles, etc.  I went back later on and selected both MusicBrainz and TheAudioDB and then had to wait for all of my musc to be scanned again.  I'll save you from that pain, go ahead and select both options here in both of the areas below.  Scroll on down and choose Nfo and save artwork in your media folders.  After that click OK.</p>
-<p><img alt="" src="/media/uploads/2021/01/22/screen-shot-2021-01-21-at-101523-pm.png" /></p>
+<p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-21-at-101523-pm.png" /></p>
 <p>Your music library is setup and we are almost done.  Click Next.</p>
-<p><img alt="" src="/media/uploads/2021/01/22/screen-shot-2021-01-21-at-101735-pm.png" /></p>
+<p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-21-at-101735-pm.png" /></p>
 <p>On the Configure Remote Access page, leave Allow remote connections to the Jellyfin Server selected but do not check Enable automatice port mapping.  Then click Next.</p>
-<p><img alt="" src="/media/uploads/2021/01/22/screen-shot-2021-01-21-at-101832-pm.png" /></p>
+<p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-21-at-101832-pm.png" /></p>
 <p>You did it!  Click finish to complete the setup. </p>
-<p><img alt="" src="/media/uploads/2021/01/22/screen-shot-2021-01-21-at-101843-pm.png" /></p>
+<p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-21-at-101843-pm.png" /></p>
 <p>After that you'll be asked to login with your Username and Password.  It will take a while to download all of the music metadata and artwork.  Till then you'll see a lot of blue boxes but Jellyfin is fully functional and setup.  At least it is inside your network.</p>
 <p>We could stop here and call it done.  But the moment you walk out of WiFi range then no more music for you.  What you really want is to expose your Jellyfin setup to the outside world, securely.  So let's get started on that part.  I promise it's not that hard and it won't even hurt.</p>
 <h2 id="router-setup">Router Setup</h2>
 <p>This will vary wildly depending on the router that you have, but in short you want to forward ports 80 and 443 and to your Raspberry Pi.</p>
 <p>My router is by Netgear, so to accomplish this I log in to the router, go to Advanced &gt; Advanced Setup &gt; Port Forwarding/Port Triggering.  Select HTTP from the Service Name dropdown, fill in the Raspberry Pi IP address and click Add, this opens up port 80 to my Raspberry Pi.  Next click Add Custom Service and then fill out the form for port 443 and my Raspberry Pi IP address.  After this is done make sure the page is saved on your router to preserve the open ports.</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-92342-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-92342-pm.png" /></p>
 <p>As I mentioned this will very greatly depending on the router that you have but the process should be somewhat similar.  You can Google how to forward ports on your specific router and get this step done.</p>
 <h2 id="cloudflare-dns-setup">Cloudflare DNS Setup</h2>
 <p>At this point we will setup Cloudflare to route traffic to your IP address.  You will need a custom domain for this part.  If you don't have one already you can purchase a custome domain from many different sources.  I've used several domain registars in the past but currently I prefer Google Domains, <a href="https://domains.google.com/">https://domains.google.com/</a>. Pick one that works for you and get it setup.  You will need access to the domain during this step.</p>
 <p>After you have your domain registered then we'll setup Cloudflare's DNS service.  You will need to create an account on Cloudflare, the free version works just fine for what we need to do.  So navigate to <a href="https://dash.cloudflare.com/sign-up">Cloudflare</a> and create an account.</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-94530-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-94530-pm.png" /></p>
 <p>Next you'll need to enter your domain name, such as example.com (you'll not enter in http://, just the domain name).</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-94820-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-94820-pm.png" /></p>
 <p>After you have entered your domain you will be taken to a page to select your account type, just scroll down and choose the free plan and click Continue</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-95049-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-95049-pm.png" /></p>
 <p>After you have selected your plan you'll be asked to verify your DNS records, skip this page for now and click Continue.  Then you'll be presented with the Change your nameservers screen.  This is a very important step.  You'll need to remove your current nameservers and replace them with Cloudflare's nameservers.  Here's what mine looked like - </p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-95513-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-95513-pm.png" /></p>
 <p>Just replace your current nameservers with the new nameservers in step 4 and save them on our registar page.  This will vary depending on which service you use, but it should be pretty easy to do.  You may have 2 or 3 nameservers in your current service, and you'll be replacing them with the two that Cloudflare provides.  Notice the warning that is in step 5, it could take 24 hours but in reality mine were ready right away.  You're milage may vary on this step, so you may have a wait a little bit.  Click Done, check nameserves and see if Cloudflare can validate, once validated you'll be taken to an overview page.</p>
 <p>Select the SSL/TLS tab and make sure Full is selected.</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-100051-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-100051-pm.png" /></p>
 <p>Now you'll need to change the DNS settings to point to your router.  For this step you need the IP address for your home router.  An easy way to get this is to go to Google and type in "what is my ip address".  A word of warning, your IP address could change unless you have a static IP address from your service provider, so you may have to update this in the future.  I use DynDNS but I have not figured out how to link that service to Cloudflare (yet).  You'll need to setup a CNAME record for jellyfin (this is your subdomain that will be pointed to your Raspberry PI, so it can be anything you want but since we're setting up Jellyfin, I went with jellyfin) and your domain name and an A record for your domain name and home IP address. </p>
 <p>Lastly, you must change the Proxy status for both of these records to DNS only, they will be defaulted to Proxied.  Just click on Proxied and you will be able to change to DNS only.</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-100323-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-100323-pm.png" /></p>
 <p>OK, give yourself a pat on the back.  You're done with that step, to me that was the hardest step as I hadn't used Cloudflare before.</p>
 <h2 id="nginx-proxy-manager-setup">Nginx Proxy Manager Setup</h2>
 <p>Here's the final step to setting up Jellyfin and being able to use it remotely.  We'll setup Nginx Proxy Manager, which allows us to expose web services on our network and even will provide an SSL certificate from Let's Encrypt.</p>
@@ -866,20 +895,20 @@ sudo reboot now
 <pre><code>
 docker ps
 </code></pre>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-105103-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-105103-pm.png" /></p>
 <p>Once the containers have a status of Up, then you are ready to move on to the next step.  It may take a minute for them to reach this status, if so just keep running the docker ps command and get the most up to date status.</p>
 <p>Now you'll want to open a browser tab and navigate to the following:</p>
 <pre><code>
 http://&lt;raspberry_pi_ip_address&gt;:81
 </code></pre>
 <p>You'll be presented with the login screen for Nginx Proxy Manager.  The default email address is admin@example.com and the password is changeme.  Login with those credentials and then you can change them to your actual email and create a password.</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-105333-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-105333-pm.png" /></p>
 <p>After you have your account squared away, you'll need to setup the Proxy.  Click on Hosts &gt; Proxy Hosts &gt; Add Proxy Host.</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-105859-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-105859-pm.png" /></p>
 <p>Here you will enter your subdomain and domain like the example below.  You'll need your Raspberry Pi IP address and you'll put that in the Forward Hostname/IP, enter 8096 in the Forward Port (this is the default port for Jellyfin), click Block Common Exploits.  Before you save click the SSL tab.</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-110306-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-110306-pm.png" /></p>
 <p>Under SSL Certificate select Request a new SSL Certificate, then select HTTP/2 Support, and I Agree to the Let's Encrypt TOS and finally Save.  You will be issued an SSL Certfificate and the Proxy will be setup.</p>
-<p><img alt="" src="/media/uploads/2021/01/23/screen-shot-2021-01-22-at-110619-pm.png" /></p>
+<p><img alt="" src="../assets/images/jellyfin/screen-shot-2021-01-22-at-110619-pm.png" /></p>
 <p>Guess what?  You're done! Open a new tab and navigate to your URL https://<jellyfin.mydomain.com> to confirm that you can reach Jellyfin in the browser.  You'll need to log in with your account credentials that you created way back at the beginning of this post.  Oh and by this point, your music has probably already finished being scanned and you should have album art and metadata (that's why we did that early on).  It's time to rock out!  </p>
 <p>So your setup in the browser but you probably want to listen on your phone as well, so download the app from your app store.  When you open up the Jellyfin app it will ask you for your server and you'll use that same URL that you naviagated to in your browser - https://<jellyfin.mydomain.com>.</p>
 <p>That's it, we're done!  I hope you enjoyed this post and I hope it helped you get setup.</p>
@@ -915,6 +944,23 @@ http://&lt;raspberry_pi_ip_address&gt;:81
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://cyberpunk.earth/@headpunk" target="_blank" rel="noopener me" title="cyberpunk.earth" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
     </a>
   
 </div>

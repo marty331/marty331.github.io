@@ -62,10 +62,12 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#streamlit-class-based-app" class="md-skip">
+        <a href="#streamlit-nuances" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +119,33 @@
     </div>
     
       
+        <form class="md-header__option" data-md-component="palette">
+  
     
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
@@ -515,8 +543,6 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -544,8 +570,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -653,8 +677,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -723,7 +745,9 @@
 
 
 <h1>Streamlit Class Based App</h1>
-<h1 id="streamlit-class-based-app"><br>Streamlit Class Based App</h1>
+<p><img alt="header" src="../../assets/images/streamlit/header.jpg" />
+<br>Streamlit Class Based App
+=========================</p>
 <p>Streamlit is an app that allows a Python devloper to turn their Python code into a shareable web app.  It works great and it's very easy to get started.  May data scientist use Jupyter notebooks and Steamlist is similar in a way but creates an actual web application that can be published.</p>
 <h2 id="streamlit-nuances">Streamlit Nuances</h2>
 <p>One of the first issues I found with Streamlit was anytime a user has any interaction with a widget (button, slider, textbox, etc), then the entire application is ran again.  I hope that the foks at Streamlit come up with a solution to this or maybe an option to turn this off so every widget is not recreated, but I digress.</p>
@@ -743,7 +767,7 @@ if increment:
 st.write('Count = ', count)
 
 </code></pre>
-<p><img alt="" src="/media/uploads/2021/09/08/no_state.gif" /></p>
+<p><img alt="" src="../../assets/images/streamlit/no_state.gif" /></p>
 <h2 id="streamlit-apps-with-state">Streamlit Apps With State</h2>
 <p>The team at streamlit recognized this shortcoming and came up with a solution to the state problem.  There were other solutions before it that were developed by developers outside of the project also.  Streamlit's solution is to offer up session_state and it works really well.  I'm currently using it in production apps. </p>
 <p>Here is the way Streamlit explains how to initialize state in an app:</p>
@@ -763,7 +787,7 @@ if 'my_key' not in st.session_state:
 st.session_state.my_key
 </code></pre>
 <p>However if you attempt to access a key that has not been initialized you will get the following type of exception:</p>
-<p><img alt="" src="/media/uploads/2021/09/08/screen-shot-2021-09-07-at-91559-pm.png" /></p>
+<p><img alt="" src="../../assets/images/streamlit/screen-shot-2021-09-07-at-91559-pm.png" /></p>
 <p>The moral of the story is, always initialze any varialbe you want to keep in session_state.  We'll get to that really soon.</p>
 <p>So let's see the the same type of app as before but one that retains state.  We will implement an Increment and see how state is retained:</p>
 <pre><code>
@@ -781,7 +805,7 @@ st.write('Count = ', st.session_state.count)
 
 </code></pre>
 <p>And then we can see this works:</p>
-<p><img alt="" src="/media/uploads/2021/09/08/has_state.gif" /></p>
+<p><img alt="" src="../../assets/images/streamlit/has_state.gif" /></p>
 <h2 id="class-based-streamlit-app-broken-state">Class Based Streamlit App - Broken State</h2>
 <p>So now we understand how to handle state in Streamlit but the code we've written so far is not class based and not object oriented.  It is functional but it's not up to professional standards and not extensible.  The reason I was even concerned with this is I have a client who needed a Streamlit app upgraded and it needed to retain state for multiple files and calculated values.  It was written by a data scientist and the work was brilliant, but it just wasn't extensible.  So I was tasked with correcting that, and I did. </p>
 <p>Let's rewrite the app as a class based app and we will add in a Decrement button to go along with our Increment button.  I will show you how I thought this should have been written in this iteration and you'll see that the state is now broken.  Bummer.</p>
@@ -814,7 +838,7 @@ if __name__ == '__main__':
 </code></pre>
 <p>Let's focus on the __init__ method.  At first glance you may think nothing of this, it looks like any other __init__ method you've seen however the problem is that Streamlit has the nuances that I mentioned previously - it reruns every time you touch a widget and session_status is going to be reset because of this nuance. </p>
 <p>Let's take a look at what happens in real life.  As you see, state is not being retained at all, no matter how many times we click Increment or Drecrement the value of count is always zero.  I don't know about the apps you've worked on, but to me this is less than ideal.  So let's fix it once and for all.</p>
-<p><img alt="" src="/media/uploads/2021/09/08/class_no_state.gif" /></p>
+<p><img alt="" src="../../assets/images/streamlit/class_no_state.gif" /></p>
 <h2 id="class-based-streamlit-app-working-state">Class Based Streamlit App - Working State</h2>
 <p>I really felt like kicking myself once I figured out my error, it was simple and the Streamlit docs literally told me what I needed to do.  In ithe __init__ method you need to look to see if your key is in session_state.  If it's not, then you add it with a default value.  If it is, then you do nothing.  Simple. </p>
 <p>Here's the code:</p>
@@ -861,7 +885,7 @@ if __name__ == '__main__':
 
 </code></pre>
 <p>So now we look for the value in session_state, if it's there no action is taken, if it is not there then we sent an initial value.  Streamlit handles the reloads and retains state for us.  Also, in this iteration I've added in two columns and a new button to display a message for the user, just to prove that state is retained with different interactions.</p>
-<p><img alt="" src="/media/uploads/2021/09/08/class_w_state.gif" /></p>
+<p><img alt="" src="../../assets/images/streamlit/class_w_state.gif" /></p>
 <p>And there you have it. Thanks for reading.  Please feel free to reach out to me on Twitter: <a href="https://twitter.com/marty331">marty331</a></p>
 <p>Photo by <strong><a href="https://www.pexels.com/@jackgittoes?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Jack Gittoes</a></strong> from <strong><a href="https://www.pexels.com/photo/crowd-watching-show-inside-the-dark-stadium-761543/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a></strong></p>
 
@@ -896,6 +920,23 @@ if __name__ == '__main__':
     Made with
     <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
       Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://cyberpunk.earth/@headpunk" target="_blank" rel="noopener me" title="cyberpunk.earth" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
     </a>
   
 </div>

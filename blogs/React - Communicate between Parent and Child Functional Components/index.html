@@ -1,0 +1,1019 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://pillar-soft.com/blogs/React%20-%20Communicate%20between%20Parent%20and%20Child%20Functional%20Components/">
+      
+      
+        <link rel="prev" href="../Python%203.9%20Dict%20Merge%20and%20Update/">
+      
+      
+        <link rel="next" href="../Streamlit%20Class%20Based%20App/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+    
+    
+      
+        <title>React - Communicate between Parent and Child Functional Components - Pillar Consulting LLC</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#functional-component" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Pillar Consulting LLC" class="md-header__button md-logo" aria-label="Pillar Consulting LLC" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pillar Consulting LLC
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              React - Communicate between Parent and Child Functional Components
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Pillar Consulting LLC" class="md-nav__button md-logo" aria-label="Pillar Consulting LLC" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    Pillar Consulting LLC
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Blogs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Blogs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A_Beginners_Guide_to_TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A Beginner's guide to TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20find%20the%20number%20of%20decimals%20in%20a%20number%20minus%20the%20trailing%20zeros%20in%20TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to find the number of decimals in a number minus the trailing zeros in Typescript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Install%20Docker%20CE%20on%20RHEL%208%20Behind%20Corporate%20Firewall/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Install Docker CE on RHEL 8 Behind Corporate Firewall
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Search%20an%20Array%20of%20Objects%20in%20JavaScript%20%28React%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Search an Array of Objects in JavaScript (React)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Setup%20an%20AWS%20SNS%20Topic%20and%20Subscription/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Setup an AWS SNS Topic and Subscription
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Test%20AWS%20SNS%20Topics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Test AWS SNS Topics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20To%20Test%20JavaScript%20Functions%20in%20VSCode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How To Test JavaScript Functions in VSCode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jellyfin%20on%20a%20Raspberry%20Pi%204%20-%20The%20Complete%20Setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jellyfin on a Raspberry Pi 4 - The Complete Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20Environment%20Variables%20the%20Right%20Way%20-%20Decouple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python Environment Variables the Right Way - Decouple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%203.9%20Dict%20Merge%20and%20Update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python 3.9 Dict Merge and Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    React - Communicate between Parent and Child Functional Components
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    React - Communicate between Parent and Child Functional Components
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functional-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functional Component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#communiction-between-functional-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Communiction Between Functional Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Communiction Between Functional Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parent-to-child-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parent to Child Communication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bidirectional-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bidirectional Communication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Streamlit%20Class%20Based%20App/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Streamlit Class Based App
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wagtail%20-%20How%20to%20add%20a%20List%20of%20Related%20Fields%20to%20a%20Page/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wagtail - How to add a List of Related Fields to a Page
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#functional-component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functional Component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#communiction-between-functional-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      Communiction Between Functional Components
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Communiction Between Functional Components">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parent-to-child-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parent to Child Communication
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bidirectional-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bidirectional Communication
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>React - Communicate between Parent and Child Functional Components</h1>
+
+<h2 id="functional-component">Functional Component</h2>
+<p>Before we get started with how to communicate between Functional components, let's define what a Funcitonal component is and isn't. </p>
+<p>One other thing to note, I'm using TypeScript.  If you aren't useing TypeScript you should really consider it as it will greatly reduce the number of errors you may inadvertantly inject into your codebase.</p>
+<p>A Functional component is simply a function that returns a React fragment.  Here's the simplest example:</p>
+<pre><code>
+import React from 'react';
+
+const Simple: React.FC&lt;React.FunctionComponent&gt; = () =&gt; {
+  return(
+    &lt;&gt;
+      &lt;h1&gt;Simple Functional Component&lt;/h1&gt;
+    &lt;/&gt;
+  )
+};
+
+export default Simple;
+</code></pre>
+<p>This Functional component named Simple, takes no props and returns a React element containing an h1 with an innerText value of "Simple Functional Component".  The &lt;&gt; and  tags are shorthand for React Fragment, this could have also returned the following:</p>
+<pre><code>
+&lt;React.Fragment&gt;
+  &lt;h1&gt;Simple Functional Component&lt;/h1&gt;
+&lt;/React.Fragment&gt;
+</code></pre>
+<p>A React Functional component does not have to explicitly return an React.Fragment, but it must return a single element that contains zero or more sub-elements.</p>
+<p>Typically you will have Functional components that contain other React components, when that is the case then the component that contains other components is considered the parent and the components that are included are considered to be child components.</p>
+<h2 id="communiction-between-functional-components">Communiction Between Functional Components</h2>
+<p>Functional components communicate by setting props to variables or functions.  These functional props are then executed on the receiving functional component.  And the good news is, this can go from a Parent to a Child or from a Child to a Parent.  Let's start off with a very simple example and then we'll move to a more complicated setup.</p>
+<h3 id="parent-to-child-communication">Parent to Child Communication</h3>
+<p>In this example we'll simplly send the title value from the parent to the child.</p>
+<pre><code>
+export default function Parent() {
+  const [child2Title, setChild2] = useState('Child2')
+
+  return (
+    &lt;div className=&quot;parent_container&quot;&gt;
+      &lt;h1&gt;Parent Component&lt;/h1&gt;
+      &lt;div className=&quot;child_container&quot;&gt;
+        &lt;Child2 
+          title={child2Title}
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+-----------------------
+interface Child2Props {
+  title: string;
+}
+
+const  Child2: React.FC&lt;Child2Props&gt; = (props) =&gt; {
+  return(
+    &lt;div className=&quot;child2&quot;&gt;
+      &lt;h2&gt;{props.title}&lt;/h2&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<p>As you can see, we create a variable named child2Title when the Parent component is initialized.  The Parent component sends the child2Title variable to the Child2 component set as the title prop.  Then we create an interface named Child2Props with a string named title.  The Child2 component is created using the Child2Props interface and the title in the h2 element is set to props.title. </p>
+<p>The parent sent the child a variable that was then used to set a value in the Child2 component.  Both components are functional components.  No constructors were needed, the code is very simple and clean.  Easy.</p>
+<h3 id="bidirectional-communication">Bidirectional Communication</h3>
+<p>Now we'll move into a more complicated scenario.  What if we wanted to have the h1 value updateable in the Parent and Child2 components?  And we want to do it from Child1.  Is that even possible?  Is it possible to update a value from a child to a parent?  Is it possible to update a value from a child and send it through the parent to another child?  It is!</p>
+<p><img alt="" src="/media/uploads/2022/07/03/parent_child_react.gif" /></p>
+<p>Let's dive into the code and see if we can do this and then I'll explain once we're done.</p>
+<pre><code>
+-------------------
+Child2
+-------------------
+import React from &quot;react&quot;;
+
+interface Child2Props {
+  title: string;
+}
+
+const  Child2: React.FC&lt;Child2Props&gt; = (props) =&gt; {
+  return(
+    &lt;div className=&quot;child2&quot;&gt;
+      &lt;h2&gt;{props.title}&lt;/h2&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default Child2;
+
+</code></pre>
+<p>First off let's look at Child2, there are no changes needed.  So above you see Child2 in it's entirety.</p>
+<p>Next we'll dive into the Parent, a few changes will be needed.</p>
+<pre><code>
+import React from &quot;react&quot;;
+import { useState } from &quot;react&quot;;
+import Child1 from './Child1';
+import Child2 from &quot;./Child2&quot;;
+
+export default function Parent() {
+  const [title, setTitle] = useState('Parent!')
+  const [child2Title, setChild2] = useState('Child2')
+
+  function updateTitle(newTitle: string){
+    setTitle(newTitle)
+  }
+  function setChild2Title(child2Title: string) {
+    setChild2(child2Title)
+  }
+  return (
+    &lt;div className=&quot;parent_container&quot;&gt;
+      &lt;h1&gt;{title}&lt;/h1&gt;
+      &lt;div className=&quot;child_container&quot;&gt;
+        &lt;Child2 
+          title={child2Title}
+        /&gt;
+        &lt;Child1 
+          updateChild2Title={setChild2Title}
+          updateParentTitle={updateTitle}
+        /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+</code></pre>
+<p>On the Parent we are now using a useState hook for title and setTitle.  We are using the title variable in our h1 for the main title of the Parent.  We have created a two functions - updateTitle to handle calling setTitle with the new value that will be received from Child1 and setChild2Title to update the value received from Child1 to the new child2Title by calling setChild2.</p>
+<p>We also added in the Child1 element in our React Fragment, Child1 has two props, updateChild2Title which is set to equal the function setChild2Title and updateParentTitle which is set to equal the function updateTitle.  This is interesting and a bit more complicated but still much simpler than a class based component.</p>
+<p>Now let's build out that Child1 component and see if we can actually update values on the Parent and Chid2.</p>
+<pre><code>
+
+interface child1props {
+  updateParentTitle(title: string): any;
+  updateChild2Title(title: string): any;
+}
+
+
+</code></pre>
+<p>We'll start with just the interface.  The interface has two values - updateParentTitle and updateChild2Title, these are the same values that are sent as props from the Parent component.  They are also both functions that take a string named title and return any.</p>
+<pre><code>
+const [titleVal, setTitleVal] = useState('')
+const [childTitleVal, setChildTitle] = useState('')
+</code></pre>
+<p>Child1 will also use useState hooks to control the values for the parent title and child2 title, both values are set to emply strings when the component is initialized as these values will be connected to input elements.</p>
+<pre><code>
+&lt;div className=&quot;grid&quot;&gt;
+   &lt;label htmlFor=&quot;parent_title&quot;&gt;Parent Title Input&lt;/label&gt;
+   &lt;input type=&quot;text&quot; name=&quot;titles&quot; id=&quot;parent_title&quot; placeholder=&quot;Parent Title&quot; onChange={handleInput}/&gt;
+   &lt;button onClick={setParent}&gt;Update parent title&lt;/button&gt;
+&lt;/div&gt;
+
+function setParent(){
+    if (titleVal.length &gt; 1) {
+      props.updateParentTitle(titleVal)
+    } 
+  }
+
+const handleInput = (event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+    setTitleVal(event.target.value)
+  }
+</code></pre>
+<p>This is a bit out of order but I want to show you the bits and pieces before the entire component is shown to make it easier to understand. </p>
+<p>We setup the input and button to update the Parent title.  The input has an onChange function that is connected to the handleInput function.  The handleInput function takes the value from the input and calls the setTtitleVal function to update the titleVal.  At this point the state has changed inside the Child1 component but has not been sent to the parent.  To send to the parent there is an onClick on the button that calls the setParent function.  The setParent function then calls props.updateParentTitle and sends the titleVal up to the parent.  Remember, the updateParentTitle function was set as a prop on the Child1 component from the Parent component it then calls the updateTitle function on the Parent component which calls the setTitle useState hook.  So at this point we can send a value from the Child1 component to the Parent component.  But we still need to send from Child1 to Parent to Child2, so let's knock that functionality out.</p>
+<pre><code>
+&lt;div className=&quot;grid&quot;&gt;
+     &lt;label htmlFor=&quot;child2_title&quot;&gt;Child2 Title Input&lt;/label&gt;
+     &lt;input type=&quot;text&quot; name=&quot;titles&quot; id=&quot;child2_title&quot; placeholder=&quot;Child2 Title&quot; onChange={handleChild2Input}/&gt;
+    &lt;button onClick={setChild2}&gt;Update Child2 title&lt;/button&gt;
+&lt;/div&gt;
+
+function setChild2(){
+    if (childTitleVal.length &gt; 1){
+      props.updateChild2Title(childTitleVal)
+    }
+  }
+
+const handleChild2Input = (event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+    setChildTitle(event.target.value)
+  }
+</code></pre>
+<p>The good news is you already know how to do this.  We are using the same pattern for sending the updated title for Child2.  We create an input and button.  The input has an onChange listener that passes the value of the intput to the setChildTittle function.  Then the button has an onClick function that calls the setChild2 function which calls props.updateChild2Title.  updateChild2Title was set as a prop on Child1 from the Parent component, which then calls the function setChild2Title.  setChild2Title calls the useState hook setChild2 which updates the child2Title value and pushes that state value down to Child2.</p>
+<p>Below is Child1 in it's entirety.  Take a few minutes to read through it as it's more complicated looking than the other components but once you understand how the small bits and pieces work then it's very digestible.</p>
+<pre><code>
+import React, { useState } from &quot;react&quot;;
+
+interface child1props {
+  updateParentTitle(title: string): any;
+  updateChild2Title(title: string): any;
+}
+
+const Child1: React.FC&lt;child1props&gt; = (props) =&gt; {
+  const [titleVal, setTitleVal] = useState('')
+  const [childTitleVal, setChildTitle] = useState('')
+
+  function setParent(){
+    if (titleVal.length &gt; 1) {
+      props.updateParentTitle(titleVal)
+    } 
+  }
+
+  function setChild2(){
+    if (childTitleVal.length &gt; 1){
+      props.updateChild2Title(childTitleVal)
+    }
+  }
+
+  const handleInput = (event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+    setTitleVal(event.target.value)
+  }
+
+  const handleChild2Input = (event: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {
+    setChildTitle(event.target.value)
+  }
+
+
+  return(
+    &lt;div&gt;
+      &lt;h2&gt;I'm Child1.&lt;/h2&gt;
+      &lt;div className=&quot;child1_container&quot;&gt;
+        &lt;div className=&quot;grid&quot;&gt;
+          &lt;label htmlFor=&quot;parent_title&quot;&gt;Parent Title Input&lt;/label&gt;
+          &lt;input type=&quot;text&quot; name=&quot;titles&quot; id=&quot;parent_title&quot; placeholder=&quot;Parent Title&quot; onChange={handleInput}/&gt;
+          &lt;button onClick={setParent}&gt;Update parent title&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;div className=&quot;grid&quot;&gt;
+          &lt;label htmlFor=&quot;child2_title&quot;&gt;Child2 Title Input&lt;/label&gt;
+          &lt;input type=&quot;text&quot; name=&quot;titles&quot; id=&quot;child2_title&quot; placeholder=&quot;Child2 Title&quot; onChange={handleChild2Input}/&gt;
+          &lt;button onClick={setChild2}&gt;Update Child2 title&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default Child1;
+</code></pre>
+<h2 id="summary">Summary</h2>
+<p>Building React functional components that communicate from parent to child, child to parent, or child to child is relatively simple.  The key to communication is done through sending functions as props.  I hope this article was helpful, if so please share!</p>
+<p>Here is the repo for the code:</p>
+<p><a href="https://github.com/marty331/react_parent_child">https://github.com/marty331/react_parent_child</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

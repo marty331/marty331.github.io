@@ -1,0 +1,1110 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://pillar-soft.com/blogs/Wagtail%20-%20How%20to%20add%20a%20List%20of%20Related%20Fields%20to%20a%20Page/">
+      
+      
+        <link rel="prev" href="../Streamlit%20Class%20Based%20App/">
+      
+      
+        <link rel="next" href="../Project_Fi/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+    
+    
+      
+        <title>Wagtail - How to add a List of Related Fields to a Page - Pillar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-problem" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Pillar" class="md-header__button md-logo" aria-label="Pillar" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pillar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Wagtail - How to add a List of Related Fields to a Page
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Pillar" class="md-nav__button md-logo" aria-label="Pillar" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    Pillar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Opt-out
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Blogs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Blogs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A_Beginners_Guide_to_TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A Beginner's guide to TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20find%20the%20number%20of%20decimals%20in%20a%20number%20minus%20the%20trailing%20zeros%20in%20TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to find the number of decimals in a number minus the trailing zeros in Typescript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Install%20Docker%20CE%20on%20RHEL%208%20Behind%20Corporate%20Firewall/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Install Docker CE on RHEL 8 Behind Corporate Firewall
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Search%20an%20Array%20of%20Objects%20in%20JavaScript%20%28React%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Search an Array of Objects in JavaScript (React)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Setup%20an%20AWS%20SNS%20Topic%20and%20Subscription/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Setup an AWS SNS Topic and Subscription
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Test%20AWS%20SNS%20Topics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Test AWS SNS Topics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20To%20Test%20JavaScript%20Functions%20in%20VSCode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How To Test JavaScript Functions in VSCode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jellyfin%20on%20a%20Raspberry%20Pi%204%20-%20The%20Complete%20Setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jellyfin on a Raspberry Pi 4 - The Complete Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20Environment%20Variables%20the%20Right%20Way%20-%20Decouple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python Environment Variables the Right Way - Decouple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%203.9%20Dict%20Merge%20and%20Update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python 3.9 Dict Merge and Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../React%20-%20Communicate%20between%20Parent%20and%20Child%20Functional%20Components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React - Communicate between Parent and Child Functional Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Streamlit%20Class%20Based%20App/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Streamlit Class Based App
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Wagtail - How to add a List of Related Fields to a Page
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Wagtail - How to add a List of Related Fields to a Page
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Solution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Result
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Project_Fi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google's Project Fi - Two years in
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Firebase_auth_swift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firebase Authentication - Simple signin with email and password for iOS using Swift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Firebase_Auth_Android/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firebase Authentication - Simple signin with email and password for Android
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Google_photos_how_to_backup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Photos - How to backup from Android and manage online
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Turn_your_android_device_into_a_second_monitor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turn your Android device into a second screen with Deskdock
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../duo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google's Duo is finally here, but was it worth the wait?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Email_notifications_from_firebase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email notifications from Firebase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../I_have_the_future/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    I have the future sitting on my face!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Setting_up_NAS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setting up NAS with Auto Backups on the RaspberryPi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Share_WiFi_to_shared_connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Share Wifi to Wired Connection with Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Solution
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Code
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-result" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Result
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1>Wagtail - How to add a List of Related Fields to a Page</h1>
+<p><br>
+<img alt="header" src="../../assets/images/movie_theater.jpeg" />
+<br>The Requirement</p>
+<hr />
+<p>I recently had a client who wanted the ability to display multiple videos about their products and have them in a scrollable carousel.  As I've learned over the years, a client's initial request is not actually what they want.  So I dug a bit deeper and discoverened that they actually want the ability to show multiple videos and some written content telling the user what the video is about.  After learning this I felt I had the fully story.  I had previously created a product page in Wagtail that allowed for a single video element and other fields that described various attributes of the product. </p>
+<h2 id="the-problem">The Problem</h2>
+<p>Now I needed to modify this page to allow for multiple videos and descriptions for each product.  This should be simple right?  I (incorrectly) assumed I could add a list of objects to the page.  Just create a list of fields?  Hmm.  I searched the Wagtail documents and the Django documents and was unable to find the elusive ListField.  In fact, I don't believe one exists.  (Feel free to comment if that is incorrect)  I truly believe that is something can be imagined then it can be built, so I knew there must be a solution out there and I had to figure it out.</p>
+<h2 id="the-solution">The Solution</h2>
+<p>After spending a bit of time trying to understand how this was going to be possible I came across StreamFields.  Everything I was reading was pointing me back to StreamFields as the solution but I was having a really hard time finding any real information about how to implement StreamFields with a RichTextField and a URLField (or any set of multiple fields).  Finally I came across the StructBlock.</p>
+<pre><code>
+Structural block types
+In addition to the basic block types above, it is possible to define new 
+block types made up of sub-blocks: for example, a ‘person’ block consisting 
+of sub-blocks for first name, surname and image, or a ‘carousel’ block 
+consisting of an unlimited number of image blocks. These structures can 
+be nested to any depth, making it possible to have a structure containing 
+a list, or a list of structures.
+</code></pre>
+<p><a href="https://docs.wagtail.io/en/stable/topics/streamfield.html?highlight=StructBlock#structural-block-types">https://docs.wagtail.io/en/stable/topics/streamfield.html?highlight=StructBlock#structural-block-types</a></p>
+<p>The example (PersonBlock) that is provided made this clear that I had found my way.  This shows a class that contains multiple related fields, which is eactly what I was looking for to solve my client's problem.</p>
+<pre><code>
+class PersonBlock(blocks.StructBlock):
+    first_name = blocks.CharBlock()
+    surname = blocks.CharBlock()
+    photo = ImageChooserBlock(required=False)
+    biography = blocks.RichTextBlock()
+
+    class Meta:
+        icon = 'user'
+</code></pre>
+<p>And then to use this on a Wagtail page the below example is shown.  OK, that's not exactly what I was going for, but I believe it will get me there.  The StreamField below shows many blocks within the StreamField, but I am looking to only add a single StructBlock.</p>
+<pre><code>
+body = StreamField([
+    ('heading', blocks.CharBlock(form_classname=&quot;full title&quot;)),
+    ('paragraph', blocks.RichTextBlock()),
+    ('image', ImageChooserBlock()),
+    ('person', PersonBlock()),
+])
+</code></pre>
+<h2 id="the-code">The Code</h2>
+<p>So my actual solution was to create a StructBlock class that conatins a URLBlock and a RichTextBlock and then embed that into a StreamField on my page. </p>
+<p>For the StructBlock class I created a new class called DescAndUrlBlock.  First, in this class I add a RichTextBlock called description, which I set required equal to True and added help text of 'Add your description'.  Then I added the URLBlock called link, this is also set to requried equal True and has a help text of 'Add video URL'.  Below this I add a meta class which contains the icon and a label.  If you want to see all of the available icons in Wagtail, add 'wagtail.contrib.styleguide' to your settings.  Then in your admin page you can navigate to Settings &gt; Styleguide and click on Icons to view all of the available choices.</p>
+<p>Below is the code - </p>
+<pre><code>
+from wagtail.core import blocks
+
+class DescAndUrlBlock(blocks.StructBlock):
+    &quot;&quot;&quot;Description and URL&quot;&quot;&quot;
+
+    description = blocks.RichTextBlock(required=True, help_text=&quot;Add your description&quot;)
+    link = blocks.URLBlock(required=True, help_text=&quot;Add video URL&quot;)
+
+    class Meta:
+        icon = &quot;snippet&quot;
+        label = &quot;Add a Video link and Description&quot;
+</code></pre>
+<p>Next I update my page, I imported StreamFieldPanel and StreamField from Wagtail, and imported the new DescAndUrlBlock that I had just created.  In the page class I add the StreamField which takes in a list of tuples.  Each tuple requires a desciption and a block (remember, I added a StrucBlock, which allows for more than one block).  I also set null equal to False and blank equal to False.  I created a meta class to give my page a name and plural name.  Then I add my content element to the content_panels, here I use the StreamFieldPanel and pass in the content field.  With that I have everything in place.</p>
+<pre><code>
+from wagtail.core.models import Page
+from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.core.fields import StreamField
+
+from .blocks import DescAndUrlBlock
+
+class VideoPage(Page):
+    content = StreamField([
+        ('desc_and_url', DescAndUrlBlock())
+    ], null=False, blank=False)
+
+    class Meta:
+        verbose_name = &quot;Video Page&quot;
+        verbose_name_plural = &quot;Videos Pages&quot;
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('content')
+    ]
+
+</code></pre>
+<h2 id="the-result">The Result</h2>
+<p><a href="https://youtu.be/gkM_EaaEo5s"><img alt="youtube" src="../../assets/images/youbtube.png" /></a></p>
+<p>Header Photo by <a href="https://unsplash.com/@jakehills?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jake Hills</a> on <a href="https://unsplash.com/collections/8635372/movie-theater?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2006 - 2024 Pillar Consulting LLC
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://cyberpunk.earth/@headpunk" target="_blank" rel="noopener me" title="cyberpunk.earth" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

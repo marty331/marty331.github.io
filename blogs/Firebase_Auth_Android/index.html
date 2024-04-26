@@ -1,0 +1,978 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://pillar-soft.com/blogs/Firebase_Auth_Android/">
+      
+      
+        <link rel="prev" href="../Firebase_auth_swift/">
+      
+      
+        <link rel="next" href="../Google_photos_how_to_backup/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+    
+    
+      
+        <title>Firebase Authentication - Simple signin with email and password for Android - Pillar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Pillar" class="md-header__button md-logo" aria-label="Pillar" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pillar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Firebase Authentication - Simple signin with email and password for Android
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Pillar" class="md-nav__button md-logo" aria-label="Pillar" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    Pillar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Opt-out
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Blogs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Blogs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A_Beginners_Guide_to_TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A Beginner's guide to TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20find%20the%20number%20of%20decimals%20in%20a%20number%20minus%20the%20trailing%20zeros%20in%20TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to find the number of decimals in a number minus the trailing zeros in Typescript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Install%20Docker%20CE%20on%20RHEL%208%20Behind%20Corporate%20Firewall/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Install Docker CE on RHEL 8 Behind Corporate Firewall
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Search%20an%20Array%20of%20Objects%20in%20JavaScript%20%28React%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Search an Array of Objects in JavaScript (React)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Setup%20an%20AWS%20SNS%20Topic%20and%20Subscription/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Setup an AWS SNS Topic and Subscription
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Test%20AWS%20SNS%20Topics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Test AWS SNS Topics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20To%20Test%20JavaScript%20Functions%20in%20VSCode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How To Test JavaScript Functions in VSCode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jellyfin%20on%20a%20Raspberry%20Pi%204%20-%20The%20Complete%20Setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jellyfin on a Raspberry Pi 4 - The Complete Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20Environment%20Variables%20the%20Right%20Way%20-%20Decouple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python Environment Variables the Right Way - Decouple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%203.9%20Dict%20Merge%20and%20Update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python 3.9 Dict Merge and Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../React%20-%20Communicate%20between%20Parent%20and%20Child%20Functional%20Components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React - Communicate between Parent and Child Functional Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Streamlit%20Class%20Based%20App/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Streamlit Class Based App
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wagtail%20-%20How%20to%20add%20a%20List%20of%20Related%20Fields%20to%20a%20Page/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wagtail - How to add a List of Related Fields to a Page
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Project_Fi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google's Project Fi - Two years in
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Firebase_auth_swift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firebase Authentication - Simple signin with email and password for iOS using Swift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Firebase Authentication - Simple signin with email and password for Android
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Google_photos_how_to_backup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Photos - How to backup from Android and manage online
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Turn_your_android_device_into_a_second_monitor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turn your Android device into a second screen with Deskdock
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../duo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google's Duo is finally here, but was it worth the wait?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Email_notifications_from_firebase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email notifications from Firebase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../I_have_the_future/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    I have the future sitting on my face!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Setting_up_NAS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setting up NAS with Auto Backups on the RaspberryPi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Share_WiFi_to_shared_connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Share Wifi to Wired Connection with Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1>Firebase Authentication – Simple Signin with Email and Password for Android</h1>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523389017172_firebase_black.png?alt=media&token=206594ab-72f8-4718-be3c-a7998fc02317"></p>
+<h2><strong>Email and Password &ndash; The Simple Log In</strong></h2>
+<p>One of the most useful features in Firebase Authentication is the ability create a secure user account with the user&rsquo;s own email and password. &nbsp;Utilizing Firebase&rsquo;s secure methods is very simple and powerful and available cross platform. &nbsp;Follow along in this article to learn how to tackle simple sign in for Firebase Authentication based on a user&rsquo;s email and password in Android. To learn how to setup simple sign in for iOS please read my article&nbsp;<a href="http://www.bighelment.com/2016/10/18/firebase-authentication-simple-signin-with-email-and-password-for-ios-using-swift/" target="_blank">Firebase Authentication &ndash; Simple Signin With Email and Password for iOS</a>&nbsp;on Swift&nbsp;and please look for Web version to be posted very soon.</p>
+<p>I admittedly believe The Setup section is a bit dry, but if you can make it through till the Manage section I believe you&rsquo;ll be a bit more entertained.</p>
+<h2><strong>The Setup&nbsp;</strong></h2>
+<p>No matter which platform you are developing on, you will need to do a little bit of setup before you get started with email and password sign in. This won&rsquo;t hurt a bit, so we&rsquo;ll take a look at the setup now for Android.</p>
+<h3><strong>Android&nbsp;</strong></h3>
+<p>1. First, you will need to create a Firebase project in the&nbsp;<a href="http://console.firebase.google.com/" target="_blank">Firebase Console</a>&nbsp;or import an existing project into the Firebase Console.<br /> 2. Click on Add Firebase to Your Android app and follow the setup steps, you&rsquo;ll need your project&rsquo;s package name and your SHA-1 (the SHA-1 says that it is optional but you need this for a fully functioning app).<br /> 3. Download the google-services.json file and save this in the /app folder of your Android app.<br /> 4. Update your root level build.gradle file to include the google-services plugin &ndash;</p>
+<blockquote> <pre> buildscript { dependencies { classpath &#39;com.google.gms:google-services:3.0.0&#39; } }</pre> </blockquote>
+<p>&nbsp;</p>
+<p>5. Update your module gradle file to add dependencies for Firebase and Firebase Auth &ndash;</p>
+<blockquote> <pre> dependences { compile &#39;com.google.firebase:firebase-core:9.6.1&#39; compile &#39;com.google.firebase:firebase-auth:9.6.1&#39; } //ADD THIS TO THE BOTTOM apply plugin: &#39;com.google.gms.google-services&#39;</pre> </blockquote>
+<p>6. Go back to the Firebase Console and enable the Email/password sign-in method. Do this by navigating to the Auth section in the console, then click the Sign in method tab, enable the Email/password sign-in method and click Save.</p>
+<h3><strong>Create a User&rsquo;s Account</strong></h3>
+<p>Now that we&rsquo;re all setup we can get started. The first thing to do is create a user&rsquo;s account in our app, you will be amazed at how simple this actually is to accomplish.</p>
+<p>In our class we&rsquo;ll get a shared instance of the FirebaseAuth object and the AuthStateListener. &nbsp;In the onCreate() method call FirebaseAuth.getObject()&nbsp;and set up the&nbsp;AuthStateListener. &nbsp;The AuthStateListener&rsquo;s job is to respond to changes in the user&rsquo;s sign in state, so as a user signs in or out our AuthStateListener listens to this and provides information on the sign in state. &nbsp;You&rsquo;ll notice we create a user with FirebaseUser and calling firebaseAuth.getCurrentUser(), if that user is not null then the user is signed in, otherwise the user is signed out.</p>
+<p>Now we&rsquo;ll start and stop the AuthStateListener by adding or removing in our onStart() and onStop() methods. &nbsp;onStart() is called when the Class is started and we will add the AuthStateListener so it can begin doing it&rsquo;s job listening for changes in our user&rsquo;s AuthState. &nbsp;onStop() is called when our Class is stopping and we will test to see if our AuthStateListener is already null and if it is not then we will remove our AuthStateListener before the Class is fully stopped.</p>
+<p>The Firebase documentation recommends doing validation steps prior to creating your user&rsquo;s account and I fully support this. &nbsp;At this point the items you can validate are simply email address and password by having the user type them in a second time and validating that the entries match, I&rsquo;ll leave that up to you as the developer to come up with that complete strategy.</p>
+<blockquote> <pre> private FirebaseAuth mAuth; private FirebaseAuth.AuthStateListener mAuthListener; @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); mAuth = FirebaseAuth.getInstance(); mAuthListener = new FirebaseAuth.AuthStateListener() { @Override public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) { FirebaseUser user = firebaseAuth.getCurrentUser(); if (user != null) { // User is signed in } else { // User is signed out Log.d(LOG_TAG, &quot;onAuthStateChanged:signed_out&quot;); } } }; } @Override public void onStart() { super.onStart(); mAuth.addAuthStateListener(mAuthListener); } @Override public void onStop() { super.onStop(); if (mAuthListener != null) { mAuth.removeAuthStateListener(mAuthListener); } }</pre> </blockquote>
+<p>At this point we are finally ready to create the user&rsquo;s account, to accomplish this we will call FirebaseAuth.createUserWithEmailAndPassword(), we&rsquo;ll create a method for this process that you may call with a button click or in any other manner that you choose. &nbsp;Most likely you have had your user enter their email and password into an EditText widget and the createUserWithEmailAndPassword requires string values for the email and password so you must convert those values to a String for the method to work correctly.</p>
+<blockquote> <pre> ... email = emailWidget.getText().toString(); password = passwordWidget.getText().toString(); .... private void createUserAccount(email String, password String){ Log.d(LOG_TAG, &quot;email: &quot;+getEmail+&quot; password: &quot;+getPassword); mAuth.createUserWithEmailAndPassword(getEmail, getPassword) .addOnCompleteListener(this, new OnCompleteListener&lt;AuthResult&gt;() { @Override public void onComplete(@NonNull Task&lt;AuthResult&gt; task) { // If account creation fails, log the exception and notifiy the user. // If account creation is successful then the authStateListener will be // notified and the signed in user information is handled by // the listener. if (!task.isSuccessful()) { Log.w(LOG_TAG, &quot;signInWithEmail:failed&quot;, task.getException()); Log.w(LOG_TAG, &quot;email: &quot;+email.toString()+&quot; password: &quot;+password.toString()); Toast.makeText(MainActivity.this, R.string.create_account_fail+task.getException(), Toast.LENGTH_LONG).show(); } } }); };</pre> </blockquote>
+<h3>Sign In with an email and password</h3>
+<p>Now that our user&rsquo;s account has been created we&rsquo;ll need to have them sign into their account. &nbsp;Below I&rsquo;ve created a method called signInWithEmail() which requires email and password as string values, again. &nbsp;In the method we call FirebaseAuth.signInWithEmailAndPassword and pass the email and password strings and addOnCompleteListener which creates and OnCompleteListener that listens for the AuthResult. &nbsp;Then we override the onComplete and require a non-null Task with the AuthResult and if the task.isSuccessful() returns true the user is signed in with their own email.</p>
+<blockquote> <pre> ... email = emailWidget.getText().toString(); password = passwordWidget.getText().toString(); ... private void signInWithEmail(email String, password String){ mAuth.signInWithEmailAndPassword(email, password) .addOnCompleteListener(this, new OnCompleteListener&lt;AuthResult&gt;() { @Override public void onComplete(@NonNull Task&lt;AuthResult&gt; task) { Log.d(LOG_TAG, &quot;signInWithEmail:onComplete:&quot; + task.isSuccessful()); // If sign in fails, display a message to the user. If sign in succeeds // the auth state listener will be notified and logic to handle the // signed in user can be handled in the listener. if (!task.isSuccessful()) { Log.w(LOG_TAG, &quot;signInWithEmail:failed&quot;, task.getException()); Log.w(LOG_TAG, &quot;email: &quot;+email.toString()+&quot; password: &quot;+password.toString()); Toast.makeText(MainActivity.this, R.string.auth_failed, Toast.LENGTH_LONG).show(); } } }); };</pre> </blockquote>
+<h2>Manage Users</h2>
+<p>After you have created a user with email and password and then successfully signed the user into your app, you can perform many actions with their user information. &nbsp;You can get the current user, get the user&rsquo;s profile information (which may include a photo, email address or name), update the user&rsquo;s profile information, reset passwords, etc. &nbsp;As we continue we&rsquo;ll discuss how to perform each of these and other tasks, and we&rsquo;ll be doing this with our boy Bob. &nbsp;Bob is a recent college grad who&rsquo;s finally landed a job and is trying to clean up his act a bit from his hard partying days at college.</p>
+<h3>Get Currently Signed In User</h3>
+<p>We&rsquo;ll start by getting Bob&rsquo;s user ID, &nbsp;the currently signed in user, and we&rsquo;ll build from there. &nbsp;We create a FirebaseUser and get FirebaseAuth.getInstance().getcurrentUser(), if the FirebaseUser is not null then we can get the user id with .getUid().</p>
+<blockquote> <pre> FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); if (user != null) { String currentUser = user.getUid(); }</pre> </blockquote>
+<h3>Get User&rsquo;s Profile Information</h3>
+<p>After we have the a valid FirebaseUser we an dig deeper and get additional data elements such as photo, email and name. &nbsp;Assume we were able to getCurrentUser() successfully we can simply request to get the user name (getDisplayName()), user&rsquo;s email (getEmail()), and get user&rsquo;s photo url (getPhotoUrl()).</p>
+<blockquote> <pre> String userName = user.getDisplayName(); String userEmail = user.getEmail(); Uri userPhotoUrl = user.getPhotoUrl();</pre> </blockquote>
+<h3>Update a User&rsquo;s Profile Information</h3>
+<p>We are able to make some simple changes to Bob&rsquo;s profile, we can change the Bob&rsquo;s display name and his photo url. &nbsp;To accomplish this we&rsquo;ll use the static class&nbsp;UserProfileChangeRequest.Builder() which allows us to setDisplayName(String) and setPhotoUri(Uri) and then call .build(). &nbsp;We&rsquo;ll call the FirebaseUser.updateProfile() and pass in the UserProfileChangeRequest that we created.</p>
+<blockquote> <pre> FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder() .setDisplayName(&quot;Bob Smith&quot;) .setPhotoUri(Uri.parse(&quot;https://mysocialmedia.com/user/bob_in_a_suit_not_drunk.jpg&quot;)) .build(); user.updateProfile(profileUpdates) .addOnCompleteListener(new OnCompleteListener&lt;Void&gt;() { @Override public void onComplete(@NonNull Task&lt;Void&gt; task) { if (task.isSuccessful()) { Log.d(LOG_TAG, &quot;User profile successfully updated.&quot;); } } });</pre> </blockquote>
+<h3>Change a User&rsquo;s Email Address</h3>
+<p>So your user has registered with their favorite email address they have deceided that superSeXy18@yahoo.com is not very professional (no idea if that&rsquo;s a real email address) and they want to update their email address to something more corporate like bob_smith_cpa@gmail.com, well fortunately with Firebase this is pretty easy to accomplish. &nbsp;If the user&rsquo;s credential is too old you may be required to re-authenticate, make sure you read the Re-Authenticate a User section below.</p>
+<blockquote> <pre> FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); user.updateEmail(&quot;bob_smith_cpa@gmail.com&quot;) .addOnCompleteListener(new OnCompleteListener&lt;Void&gt;() { @Override public void onComplete(@NonNull Task&lt;Void&gt; task) { if (task.isSuccessful()) { Log.d(TAG, &quot;User email address updated to:&quot;+user.getEmail()); } } });</pre> </blockquote>
+<h3>Send a User an Email to Reset Their Password</h3>
+<p>So now Bob Smith looks professional to all his new buddies at E-Corp, but he forgot his password (probably too busy trying to find a way to convert the masses to E-Coin). &nbsp;Fortunately you can help him out (don&rsquo;t expect the favor to be returned) and send him an email to reset his password.</p>
+<p>To send Bob his password email you will need to get an instance of the FirebaseAuth (don&rsquo;t you have this already?) and then get the email address that the account is registered to, I would have Bob enter this via an EditText field. &nbsp;Once you have the string version of Bob&rsquo;s email then you will call FirebaseAuth.sendPasswordResetEmail(emailAddress) as shown below. &nbsp;If everything is successful then Bob should get an email allowing him to reset his password. &nbsp;Keep in mind that you can customize the email that is sent to your user&rsquo;s by visiting the&nbsp;<a href="https://console.firebase.google.com/">Firebase Console</a>&nbsp;on the Email Templates page.</p>
+<blockquote> <pre> FirebaseAuth auth = FirebaseAuth.getInstance(); String emailAddress = &quot;bob_smith_cpa@gmail.com&quot;; auth.sendPasswordResetEmail(emailAddress) .addOnCompleteListener(new OnCompleteListener&lt;Void&gt;() { @Override public void onComplete(@NonNull Task&lt;Void&gt; task) { if (task.isSuccessful()) { Log.d(TAG, &quot;Password Reset Email sent.&quot;); } } });</pre> </blockquote>
+<h3>Update a User&rsquo;s Password</h3>
+<p>Since Bob is too busy to check his email and probably only uses Slack (#zeroinbox), we can allow him to update his password right in the app. &nbsp;Allow Bob to enter a new password (security verification is left up to you and I encourage you to set a minimum length, special characters, upper and lower case rules) as a String.&nbsp; Most likely you&rsquo;ll do this via an EditText so don&rsquo;t forget to get the string value. &nbsp;Call FirebaseUser.updatePassword() and pass in the string value for the new password. &nbsp;If you allow Bob to set a password that is less than 6 characters you can expect to get a&nbsp;<a href="https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthWeakPasswordException">FirebaseAuthWeakPasswordException</a>&nbsp;and no one wants that. &nbsp;If the user&rsquo;s credential is too old you may be required to re-authenticate, make sure you read the Re-Authenticate a User section below.</p>
+<blockquote> <pre> String newPassword = &quot;eXpl0!t_Dn1eD!&quot;; user.updatePassword(newPassword) .addOnCompleteListener(new OnCompleteListener&lt;Void&gt;() { @Override public void onComplete(@NonNull Task&lt;Void&gt; task) { if (task.isSuccessful()) { Log.d(LOG_TAG, &quot;User password updated.&quot;); } } });</pre> </blockquote>
+<h3>Delete a User&rsquo;s Account</h3>
+<p>The time may come when Bob is too swamped at E-Corp to keep using your app as it&rsquo;s distracting him from his climp up the evil ladder and Bob just wants to delete his account. &nbsp;Never fear Bob, we can&rsquo;s save you from selling your soul but we can delete your account from our awesome app. &nbsp;As long as you have a reference to the FirebaseUser you can call FirebaseUser.delete() and Bob&rsquo;s account is no more. &nbsp;Simple. &nbsp;If the user&rsquo;s credential is too old you may be required to re-authenticate, make sure you read the Re-Authenticate a User section below.</p>
+<blockquote> <pre> FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); user.delete() .addOnCompleteListener(new OnCompleteListener&lt;Void&gt;() { @Override public void onComplete(@NonNull Task&lt;Void&gt; task) { if (task.isSuccessful()) { Log.d(LOG_TAG, &quot;Adios Bob&quot;); } } });</pre> </blockquote>
+<h3>Re-Authenticate a User</h3>
+<p>If it&rsquo;s been some time since Bob signed in (forget that whole account deletion section above, Bob couldn&rsquo;t go through with deleting his account) you may need to re-authenticate a user for several of the actions above &ndash; Delete a User&rsquo;s Account, Updating a User&rsquo;s Password, Change a User&rsquo;s Email Address. &nbsp;If you try one of these actions and receive a&nbsp;<a href="https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthRecentLoginRequiredException">FirebaseAuthRecentLoginRequiredException</a>&nbsp;error then you will need to Re-Authenticate your user and get new signin credentials. &nbsp;To do this you will basically have the user sign in to their app but this time you&rsquo;ll use a different method. &nbsp;Get a new instance of FirebaseUser. &nbsp;Create a new AuthCredential and set it equal to EmailAuthProvider.getCredential(email, password), you&rsquo;ll need to pass in email and password as String values. &nbsp;Next call FirebaseAuth.reauthenticate() and pass in the AuthCredential, if successful the user is reauthenticaed and you can retry the original action. &nbsp;If you receive an error then you may listen for that and deal with it as appropriate.</p>
+<p>&nbsp;</p>
+<blockquote> <pre> FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); AuthCredential credential = EmailAuthProvider .getCredential(&quot;bob_smith_cpa@gmail.com&quot;, &quot;reallyHardPassword&quot;); user.reauthenticate(credential) .addOnCompleteListener(new OnCompleteListener&lt;Void&gt;() { @Override public void onComplete(@NonNull Task&lt;Void&gt; task) { Log.d(TAG, &quot;User re-authenticated.&quot;); } });</pre> </blockquote>
+<h3>Sign a User Out</h3>
+<p>Now after all that work don&rsquo;t forget to give Bob a way to sign out of your app, after all he&rsquo;s got work to do!</p>
+<blockquote> <pre> FirebaseAuth.getInstance().signOut();</pre> </blockquote>
+<p>That&rsquo;s all folks! &nbsp;Thanks for reading this to the end, I hope it wasn&rsquo;t too boring for you. &nbsp;The&nbsp;<a href="https://firebase.google.com/docs/">Firebase Docs</a>&nbsp;have everything you&rsquo;ve read here documented, but without my amazing commentary, they are excellent and I encourage you to check them out.</p>
+<p>As I mentioned in the beginning I&rsquo;ll be posting an article detailing these same actions for iOS and the web soon. &nbsp;Please check back for those and if you enjoyed this please share it on social media. &nbsp;If you have found any errors or ommisions please leave me feedback so I can get it corrected as soon as possible!</p>
+<p>&nbsp;</p>
+<ol> </ol>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp; <ol> </ol> </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2006 - 2024 Pillar Consulting LLC
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://cyberpunk.earth/@headpunk" target="_blank" rel="noopener me" title="cyberpunk.earth" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

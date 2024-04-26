@@ -1,0 +1,1019 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://pillar-soft.com/blogs/Setting_up_NAS/">
+      
+      
+        <link rel="prev" href="../I_have_the_future/">
+      
+      
+        <link rel="next" href="../Share_WiFi_to_shared_connection/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+    
+    
+      
+        <title>Setting up NAS with Auto Backups on the RaspberryPi - Pillar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Pillar" class="md-header__button md-logo" aria-label="Pillar" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pillar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Setting up NAS with Auto Backups on the RaspberryPi
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Pillar" class="md-nav__button md-logo" aria-label="Pillar" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    Pillar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Opt-out
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Blogs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Blogs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A_Beginners_Guide_to_TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A Beginner's guide to TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20find%20the%20number%20of%20decimals%20in%20a%20number%20minus%20the%20trailing%20zeros%20in%20TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to find the number of decimals in a number minus the trailing zeros in Typescript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Install%20Docker%20CE%20on%20RHEL%208%20Behind%20Corporate%20Firewall/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Install Docker CE on RHEL 8 Behind Corporate Firewall
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Search%20an%20Array%20of%20Objects%20in%20JavaScript%20%28React%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Search an Array of Objects in JavaScript (React)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Setup%20an%20AWS%20SNS%20Topic%20and%20Subscription/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Setup an AWS SNS Topic and Subscription
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Test%20AWS%20SNS%20Topics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Test AWS SNS Topics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20To%20Test%20JavaScript%20Functions%20in%20VSCode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How To Test JavaScript Functions in VSCode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jellyfin%20on%20a%20Raspberry%20Pi%204%20-%20The%20Complete%20Setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jellyfin on a Raspberry Pi 4 - The Complete Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20Environment%20Variables%20the%20Right%20Way%20-%20Decouple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python Environment Variables the Right Way - Decouple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%203.9%20Dict%20Merge%20and%20Update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python 3.9 Dict Merge and Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../React%20-%20Communicate%20between%20Parent%20and%20Child%20Functional%20Components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React - Communicate between Parent and Child Functional Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Streamlit%20Class%20Based%20App/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Streamlit Class Based App
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wagtail%20-%20How%20to%20add%20a%20List%20of%20Related%20Fields%20to%20a%20Page/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wagtail - How to add a List of Related Fields to a Page
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Project_Fi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google's Project Fi - Two years in
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Firebase_auth_swift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firebase Authentication - Simple signin with email and password for iOS using Swift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Firebase_Auth_Android/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firebase Authentication - Simple signin with email and password for Android
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Google_photos_how_to_backup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Photos - How to backup from Android and manage online
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Turn_your_android_device_into_a_second_monitor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turn your Android device into a second screen with Deskdock
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../duo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google's Duo is finally here, but was it worth the wait?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Email_notifications_from_firebase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email notifications from Firebase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../I_have_the_future/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    I have the future sitting on my face!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Setting up NAS with Auto Backups on the RaspberryPi
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Share_WiFi_to_shared_connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Share Wifi to Wired Connection with Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1>Setting Up NAS with Auto Backups on the Raspberry Pi</h1>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1518494450751_Selection_011.jpeg?alt=media&token=360a15c5-37aa-4f4a-99e8-44f74748f5d4"></p>
+<p><strong>Edit – Logmein killed Pirvoxy, so this part of the article no longer works.</strong></p>
+<p>Alright here’s the follow up to my last post, Share WiFi to Wired Connection with Ubuntu.&nbsp;</p>
+<p>So I set up the rPi with rdesktop, gedit, ntfs-3g, Samba, Hamachi, Privoxy and rsync to build my NAS and VPN. I have two external hard drives (2 TB and 500 GP) plugged in to a powered USB hub. I also have the powered USB hub powering the rPi. I’ll reference the links I used as I go along, this wasn’t hard to do.&nbsp;</p>
+<p>I’ll say it right now, if I can figure it out, anyone can.&nbsp;</p>
+<p>First off if you haven’t put Rasbian on your rPi, go do it and then come back….you’re back already? Great, let’s get started.&nbsp;</p>
+<p>I don’t like having to plug in a monitor, keyboard and mouse every time I want to access my rPi, so go ahead and do it the first time for the setup. Now that you have your peripherals all set up, let’s install rdesktop so we don’t have to do this again.&nbsp;</p>
+<p>Open the terminal and then:&nbsp;</p>
+<p>sudo apt-get install rdesktop&nbsp;</p>
+<p>then get the IP address and write it down:&nbsp;</p>
+<p>ifconfig eth0&nbsp;</p>
+<p>Great. Now you can keep working on it as you have it set up or you can access it from another computer. IF you’re on linux, go to your terminal and enter:&nbsp;</p>
+<p>rdesktop ipaddress from above -g 90% (the -g 90% tells rdesktop to launch at 90% of the size of your screen. If you want something larger or smaller, suit yourself.) Sign in as your user id and password for your rPi.&nbsp;</p>
+<p>Since I’m not a big nano fan, I like to use gedit, let’s install it now:&nbsp;</p>
+<p>sudo apt-get install gedit&nbsp;</p>
+<p>Now I initially followed this guide to set up Samba, http://elinux.org/R-Pi_NAS. We’ll walk through the relevant parts. Let’s install Samba:&nbsp;</p>
+<p>sudo apt-get install samba samba-common-bin&nbsp;</p>
+<p>If you’re prompted to continue then say yes. Copy the the samba config file, in case we mess it up.&nbsp;</p>
+<p>sudo cp /etc/samba/smb.conf /etc/samba/smb.conf.old&nbsp;</p>
+<p>On the link above we’re told to use nano to update our config file, as I said, I don’t like it. The great thing about Linux is, if you don’t like something, you don’t have to use it. So we won’t use it…much.&nbsp;</p>
+<p>Let’s work on that config file:&nbsp;</p>
+<p>sudo gedit /etc/samba/smb.conf&nbsp;</p>
+<p>Search for security (ctrl + F and type security, then press enter) and you’ll find the following:&nbsp;</p>
+<p># security = user&nbsp;</p>
+<p>Go ahead and remove the #, so we just have:&nbsp;</p>
+<p>security = user&nbsp;</p>
+<p>Now let’s search for homes and change:&nbsp;</p>
+<p>read only = yes<br><br>to<br><br>read only = no&nbsp;</p>
+<p>Now save and close the file. Run the following command to restart Samba:&nbsp;</p>
+<p>sudo /etc/init.d/samba restart&nbsp;</p>
+<p>You’ll see the following:&nbsp;</p>
+<p>Stopping Samba daemons: nmdb smdb<br><br>Starting Samba daemons: nmdb smdb&nbsp;</p>
+<p>Samba comes configured with your user id defined, assuming it’s pi we will now allow pi to be a Samba user.&nbsp;</p>
+<p>sudo smbpasswd -a pi&nbsp;</p>
+<p>You’ll need to enter the password twice and then pi will be setup as the samba user id. If you would like to add an additional user(not required), then do the following:&nbsp;</p>
+<p>sudo useradd marty -m -G users<br><br>sudo smbpasswd marty&nbsp;</p>
+<p>You’ll be asked to enter the password for marty twice now.&nbsp;</p>
+<p>Now let’s make a shared folder to house our main storage (this will be for user pi, not for marty):&nbsp;</p>
+<p>sudo mkdir /home/pi/shared&nbsp;</p>
+<p>We also need to make a folder to house our backups:&nbsp;</p>
+<p>sudo mkdir /home/pi/backup&nbsp;</p>
+<p>Once more we need to edit the Samba configuration file, this time we are telling it about the shared folder we just created. So let’s go do that:&nbsp;</p>
+<p>sudo gedit /etc/samba/smb.conf&nbsp;</p>
+<p>Scroll down to the end of the file and add the following:&nbsp;</p>
+<p>[public]<br><br>comment = Public Storage<br><br>path = /home/pi/shared<br><br>valid users = @users<br><br>force group = users<br><br>create mask = 0660<br><br>directory mask = 0771<br><br>read only = no&nbsp;</p>
+<p>Now save and close the file. Run the following command to restart Samba:&nbsp;</p>
+<p>sudo /etc/init.d/samba restart&nbsp;</p>
+<p>You’ll see the following:&nbsp;</p>
+<p>Stopping Samba daemons: nmdb smdb<br><br>Starting Samba daemons: nmdb smdb&nbsp;</p>
+<p>Now we are getting ready to start mapping our drives, so let’s make sure we have support for NTFS-formatted disks.&nbsp;</p>
+<p>sudo apt-get install ntfs-3g&nbsp;</p>
+<p>Great, good job!&nbsp;</p>
+<p>Let’s go find our hard drives that we have mounted so we can get them setup to do their jobs. Run the following command to determine where they are currently located in our file system:&nbsp;</p>
+<p>sudo fdisk – l&nbsp;</p>
+<p>You’ll see something like this:&nbsp;</p>
+<p></p>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1518494450751_Selection_011.jpeg?alt=media&token=360a15c5-37aa-4f4a-99e8-44f74748f5d4" alt="" style="height: ;width: "/><p>&nbsp;</p></p>
+<p>Now let’s look at the results:<br><br>/dev/mcblk0 – This is the SD Card that Rasbian is running on.<br><br>/dev/sda – This is the 2 TB hard drive that I am using for my main storage.<br><br>/dev/sdb – This is the 500 GB hard drive that I am going to use for backing up my family pictures and business documents.&nbsp;</p>
+<p>Let’s prepare to mount the harddrives by their UUID so they can be unplugged and plugged back in to the Raspberry Pi and will automatically mount to the correct file location. (Thank to Colin for this suggestion.)&nbsp;</p>
+<p>In terminal execute:<br><br>sudo blkid<br><br>You will see results similar to the below:&nbsp;</p>
+<p>/dev/sda1: UUID=”4369e650-ce1b-4ea5-8e24-809e275a0314″ TYPE=”ext4″<br><br>/dev/sda2: UUID=”1Ugipa-CKBF-qUpA-xJtp-q49N-fb6q-0Gikql” TYPE=”LVM2_member”&nbsp;</p>
+<p>We will need to capture the values that are in quotes beside UUID=”xxxx”.&nbsp;</p>
+<p>The next step is to mount the hard drives to the folders we created earlier. Before we do this we need to make sure that they are not currently mounted. We are going to do this the easy way, open the file explorer as root:&nbsp;</p>
+<p>sudo pcmanfm&nbsp;</p>
+<p>and you will probably see the two hard drives mounted, simply client the unmount button beside each one. then close the file manager. Now let’s mount the hard drives to their permanent location:&nbsp;</p>
+<p>sudo mount /dev/sda1 /home/pi/shared<br><br>sudo mount /dev/sdb1 /home/pi/backup&nbsp;</p>
+<p>Great job, now we have access from our home folder to both of these drives. But we need to make this happen automatically on boot, easy:&nbsp;</p>
+<p>sudo gedit /etc/fstab&nbsp;</p>
+<p>Now in the fstab file add the following two lines below the line that starts with /dev/mcblk0p2&nbsp;</p>
+<p>Here is where we will use the UUID for each drive:&nbsp;</p>
+<p>UUID=4369e650-ce1b-4ea5-8e24-809e275a0314 /home/pi/shared auto noatime 0 0<br><br>UUID=1Ugipa-CKBF-qUpA-xJtp-q49N-fb6q-0Gikql /home/pi/backup auto noatime 0 0&nbsp;</p>
+<p>Make sure you tab where you see the spaces above. Now save and close the file. We are set now, the drives will auto-mount to our home folders when we reboot.&nbsp;</p>
+<p>Now it’s time to get started with our backups, we need the software first:&nbsp;</p>
+<p>sudo apt-get install rsync<br><br>(that was hard huh!)&nbsp;</p>
+<p>Well we’ve reached the point where we have to use nano. It’s not that hard, but it’s definitely different than using a text editor. You will need to use your arrow keys to move up and down and then to save the file you’ll need to press ‘Ctrl + X’ and then you’ll be prompted to accept by pressing ‘y’. We are now going to configure our backups. I used the guide found on<a href="http://www.howtogeek.com/139433/how-to-turn-a-raspberry-pi-into-a-low-power-network-storage-device/" target="_self">How to Geek</a>, as my inspiration for this, but I’ve modified a few things to work better for me. I want to give them credit for the idea though. If you read their article they instruct you to setup your backup to run nightly, however I thought that was bit much, so I decided to educate myself and figure out how to modify this. I found this <a href="http://www.pantz.org/software/cron/croninfo.html" target="_self">link</a>, which explains how crontab works. Basically crontab takes this entry to determine when it will execute the command that follows:&nbsp;</p>
+<p># Minute Hour Day of Month Month Day of Week Command<br><br># (0-59) (0-23) (1-31) (1-12 or Jan-Dec) (0-6 or Sun-Sat)<br><br>0 2 12 * 0,6 rsync&nbsp;</p>
+<p>I wanted to have my backups running at alternating times and only a couple of times a week, so let’s go ahead and configure that:&nbsp;</p>
+<p>crontab -e&nbsp;</p>
+<p>Now you are in nano, navigate down to the bottom of the list and enter the following:<br><br>0 2 * * 0,3 rsync -av –delete /home/pi/shares/Pictures /home/pi/backup<br><br>0 2 * * 1,5 rsync -av –delete /home/pi/shares/busdocs /home/pi/backup&nbsp;</p>
+<p>Now save the file, ‘Ctrl + X’ and then confirm ‘y’. So let me explain what we just set up, I’ll go through the first line:<br><br>0 – 0 minutes<br><br>2 – 2 hours (2 AM)<br><br>* – Any day of the month.<br><br>* – Any month.<br><br>0,3 – Run this on Sunday and Wenesday. (0 – Sunday, 1 – Monday, 2 – Tuesday, etc)<br><br>rsync – Command to be ran.<br><br>-av – archive and verbose<br><br>– -delete – (MAKE sure there are TWO dashes – -, there should not be a space between these.) This parameter tells rsync to delete any file on the to folder that is not on the from folder, so if you remove a file in your main storage it will be removed in you backup.<br><br>/home/pi/shares/Pictures – This is the from folder.<br><br>/home/pi/backup – This is the to folder.&nbsp;</p>
+<p>This last step is optional but recommended. Let’s go ahead and run rsync for two reasons, to verify that it can successfully back up your data and to get the biggest backup done.&nbsp;</p>
+<p>rsync -av –delete /home/pi/shares/Pictures /home/pi/backup/Pictures&nbsp;</p>
+<p>Depending on how much data you are backing up, this could take a while. When I first ran it I backed up around 40 GB of pictures and it took about 2 1/2 to 3 hours. So go get some coffee and relax.&nbsp;</p>
+<p>So your backup is set and ready to run! You did it! And it wasn’t even that hard!&nbsp;</p>
+<p>There may be a better way to set this up, but this what worked for me, I hope you’ve enjoyed getting your rPi setup as a NAS with auto backups!&nbsp;</p>
+<p>One final piece, setup Hamachi so you can access your files remotely (yes you can already do it if you have SSH installed (which you should.)) Go to logmein.com and create a free account and set up your network. You can install this on Linux, Mac and windoze.&nbsp;</p>
+<p>sudo apt-get update&nbsp;</p>
+<p>sudo apt-get install –fix-missing lsb lsb-core (this will take a bit)&nbsp;</p>
+<p>sudo dpkg -1 –force-architecture –force-depends logmein-hamachi_2.1.0.86-1_armel.deb<br><br>( the above line is dash dash force dash architecture and then dash dash force dash depends)&nbsp;</p>
+<p>Now set up hamachi on the rPi:&nbsp;</p>
+<p>sudo hamachi login<br><br>sudo hamachi attach [INSERT LOGMEIN.COM EMAIL HERE]<br><br>sudo hamachi set-nick [INSERT A NICKNAME FOR YOUR RASPBERRY PI]&nbsp;</p>
+<p>Now back on your computer on logmein.com, go to your networks and grant the Pi permissions to join your network and write down the network ID (a 9-digit number) for that network.&nbsp;</p>
+<p>Back on the rPi:<br><br>sudo hamachi do-join [THE NETWORK ID YOU WROTE DOWN]&nbsp;</p>
+<p>Now start SSH so you can reach the rPi remotely:<br><br>sudo /etc/init.d/ssh start&nbsp;</p>
+<p>You should test out the set up now by SSH’ing into the rPi at the virtual IP on the logmein.com site, it will be something like 25.xx.xx.xx:<br><br>ssh pi@25.xx.xx.xx&nbsp;</p>
+<p>Now you can access your rPi remotely (outside of your network.)&nbsp;</p>
+<p>You can also remote desktop into the pi at the new virtual IP address:<br><br>rdesktop 25.xx.xx.xx -g 70%&nbsp;</p>
+<p>Here are the links that pulled knowledge from for all of this.:&nbsp;</p>
+<p><a href="http://www.howtogeek.com/139433/how-to-turn-a-raspberry-pi-into-a-low-power-network-storage-device/" target="_self">http://www.howtogeek.com/139433/how-to-turn-a-raspberry-pi-into-a-low-power-network-storage-device/</a>&nbsp;</p>
+<p><a href="http://linux.about.com/library/cmd/blcmdl1_rsync.htm" target="_self">http://linux.about.com/library/cmd/blcmdl1_rsync.htm</a>&nbsp;</p>
+<p><a href="http://www.pantz.org/software/cron/croninfo.html" target="_self">http://www.pantz.org/software/cron/croninfo.html</a>&nbsp;</p>
+<p><a href="http://elinux.org/R-Pi_NAS" target="_self">http://elinux.org/R-Pi_NAS</a>&nbsp;</p>
+<p><a href="http://lifehacker.com/5978098/turn-a-raspberry-pi-into-a-personal-vpn-for-secure-browsing-anywhere-you-go" target="_self">http://lifehacker.com/5978098/turn-a-raspberry-pi-into-a-personal-vpn-for-secure-browsing-anywhere-you-go</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2006 - 2024 Pillar Consulting LLC
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://cyberpunk.earth/@headpunk" target="_blank" rel="noopener me" title="cyberpunk.earth" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

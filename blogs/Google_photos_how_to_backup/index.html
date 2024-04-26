@@ -1,0 +1,956 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://pillar-soft.com/blogs/Google_photos_how_to_backup/">
+      
+      
+        <link rel="prev" href="../Firebase_Auth_Android/">
+      
+      
+        <link rel="next" href="../Turn_your_android_device_into_a_second_monitor/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.ico">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.12">
+    
+    
+      
+        <title>Google Photos - How to backup from Android and manage online - Pillar</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Pillar" class="md-header__button md-logo" aria-label="Pillar" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pillar
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Google Photos - How to backup from Android and manage online
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Pillar" class="md-nav__button md-logo" aria-label="Pillar" data-md-component="logo">
+      
+  <img src="../../assets/Pillar.svg" alt="logo">
+
+    </a>
+    Pillar
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contact
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Opt-out
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Blogs
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Blogs
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../A_Beginners_Guide_to_TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    A Beginner's guide to TypeScript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20find%20the%20number%20of%20decimals%20in%20a%20number%20minus%20the%20trailing%20zeros%20in%20TypeScript/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to find the number of decimals in a number minus the trailing zeros in Typescript
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Install%20Docker%20CE%20on%20RHEL%208%20Behind%20Corporate%20Firewall/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Install Docker CE on RHEL 8 Behind Corporate Firewall
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Search%20an%20Array%20of%20Objects%20in%20JavaScript%20%28React%29/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Search an Array of Objects in JavaScript (React)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Setup%20an%20AWS%20SNS%20Topic%20and%20Subscription/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Setup an AWS SNS Topic and Subscription
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20to%20Test%20AWS%20SNS%20Topics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to Test AWS SNS Topics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../How%20To%20Test%20JavaScript%20Functions%20in%20VSCode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How To Test JavaScript Functions in VSCode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Jellyfin%20on%20a%20Raspberry%20Pi%204%20-%20The%20Complete%20Setup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jellyfin on a Raspberry Pi 4 - The Complete Setup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%20Environment%20Variables%20the%20Right%20Way%20-%20Decouple/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python Environment Variables the Right Way - Decouple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Python%203.9%20Dict%20Merge%20and%20Update/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python 3.9 Dict Merge and Update
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../React%20-%20Communicate%20between%20Parent%20and%20Child%20Functional%20Components/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    React - Communicate between Parent and Child Functional Components
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Streamlit%20Class%20Based%20App/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Streamlit Class Based App
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Wagtail%20-%20How%20to%20add%20a%20List%20of%20Related%20Fields%20to%20a%20Page/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wagtail - How to add a List of Related Fields to a Page
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Project_Fi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google's Project Fi - Two years in
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Firebase_auth_swift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firebase Authentication - Simple signin with email and password for iOS using Swift
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Firebase_Auth_Android/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Firebase Authentication - Simple signin with email and password for Android
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Google Photos - How to backup from Android and manage online
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Turn_your_android_device_into_a_second_monitor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Turn your Android device into a second screen with Deskdock
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../duo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google's Duo is finally here, but was it worth the wait?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Email_notifications_from_firebase/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Email notifications from Firebase
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../I_have_the_future/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    I have the future sitting on my face!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Setting_up_NAS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setting up NAS with Auto Backups on the RaspberryPi
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Share_WiFi_to_shared_connection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Share Wifi to Wired Connection with Ubuntu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1>Google Photos – How to backup from Android and manage Online</h1>
+<p><img src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388043500_photos.png?alt=media&token=510f7a24-04ae-4ba2-b166-2714d6534984"></p>
+<p>Google Photos offers users incredible storage options for all your precious photos so &nbsp;you never have to worry about losing them again. &nbsp;But how do you get set up so your photos are backed up? &nbsp;And once &nbsp;you have them backed up, how do you access them? &nbsp;Well fear not, because Pillar Consulting is here to help you along.</p>
+<p>Let&rsquo;s start out by looking at the options that Google giveth us &ndash; We have High Quality and Original, below are the details on what each of those mean.</p>
+<h2>High quality</h2>
+<ul> <li><strong>Unlimited free storage</strong>.</li> <li><strong>Regular cameras</strong>: Recommended for phones or point-and-shoot cameras that are 16 megapixels (MP) or less.</li> <li><strong>Uses</strong>: Good for typical printing and sharing.</li> <li><strong>Size</strong>: Saves high-quality photos and videos while reducing size.</li> </ul>
+<h2>Original</h2>
+<ul> <li><strong>Limited free storage</strong>: Uses storage in your Google Account, regardless of photo or video size.</li> <li><strong>DSLR cameras</strong>: Recommended if you take photos with a DSLR camera and want to maintain the exact original quality.</li> <li><strong>Uses</strong>: Recommended for printing large banners or to store original files.</li> <li><strong>Size</strong>: Stores your photos and videos exactly as you captured them.</li> </ul>
+<p>If you&rsquo;re like most people High quality storage is all you need and it&rsquo;s completely free, you can literally store a million pictures if you want to take that many and it won&rsquo;t cost you a cent. &nbsp;I can hear the alarm bells going off in some of your heads already, &lsquo;There&rsquo;s nothing free in life!&rsquo; and that&rsquo;s probably true, by storing your photos Google has the right to scan them so their Artificial Intelligence algorithms can get better over time at recognizing what is in each image. &nbsp;That&rsquo;s it, Google isn&rsquo;t going to sell your pictures or do anything nefarious with them.</p>
+<p><strong>Android Backup</strong></p>
+<p>On your Android phone, find the Google Photos app and open it up. &nbsp;Click the&nbsp;<img alt="hamburger" height="auto" src="https://i1.wp.com/www.bighelment.com/wp-content/uploads/2016/10/hamburger.png?zoom=1.100000023841858&amp;resize=48%2C29" width="80%" />hamburger menu in the top left, then scroll down to the bottom and click Settings. &nbsp;You should now see a page similar to this:</p>
+<p><img alt="" height="auto" src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388050204_backup.png?alt=media&amp;token=0b379384-32cb-4a40-aca2-e4d7a75535f3" width="80%" /></p>
+<p>&nbsp;</p>
+<p>Click the &lsquo;Back up &amp; sync&rsquo; button and you&rsquo;ll be taken to the backup and sync page, which looks like this:</p>
+<p><img alt="" height="auto" src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388055900_sync.png?alt=media&amp;token=f5049b49-bde7-47ed-b7c4-e3a889bb614b" width="80%" /></p>
+<p>&nbsp;</p>
+<p>There are several actions to take here &ndash; first make sure the gear is on (highlighted blue) for Back up &amp; Sync, after that then click the Upload Size button to chose the type of upload you want, remember Original quality will use your storage space and could end up costing you money to back up but High quality is totally free.</p>
+<p><img alt="" height="auto" src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388062368_sync_type.png?alt=media&amp;token=c8f83e18-3015-45e9-9e66-103080b03243" width="80%" /></p>
+<p>After you&rsquo;ve made that decision then click the Back up device folders button and choose which folders you want to auto-backup. &nbsp;The folders you have available will differ depending on what apps you have installed on your device but it will look similar to this:</p>
+<p><img alt="" height="auto" src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388068364_folders.png?alt=media&amp;token=0c834a59-fac2-4569-956c-8f212e4de9b1" width="80%" /></p>
+<p>From time to time I choose to not back up folders and only sync individual pictures or may choose to sync a folder, to accomplish this you will again click the&nbsp;<img alt="hamburger" height="auto" src="https://i1.wp.com/www.bighelment.com/wp-content/uploads/2016/10/hamburger.png?zoom=1.100000023841858&amp;resize=48%2C29" width="80%" />hamburger menu and this time choose Device Folders. &nbsp;From here you can choose to backup an individual picture or sync an entire folder, just click the upload button like so-</p>
+<p><img alt="" height="auto" src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388074242_upload.png?alt=media&amp;token=cdd51376-8c06-4d7b-bcb7-52e01c82cdd7" width="80%" /></p>
+<p>&nbsp;</p>
+<p>With that we have our Android device all set to sync your photos to Google Photos, now we&rsquo;ll go take a look at those photos in the cloud and see how we can view and retrieve them at a later time.</p>
+<p>On your web browser (this works best on a computer and I reccomend using Google Chrome as the browser), navigate to&nbsp;https://photos.google.com&nbsp; If you&rsquo;re not already signed in to your Google account you&rsquo;ll be prompted to do so at this time. &nbsp;Once you&rsquo;ve signed in you&rsquo;ll be greeted with all the photos that you have backed up to your cloud, in reverse chronological order so you&rsquo;ll see your most recent pictures first.</p>
+<p><img alt="" height="auto" src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388080922_google_photos.png?alt=media&amp;token=d0567f2a-ae23-46eb-9e83-2a674880ed83" width="80%" /></p>
+<p>&nbsp;</p>
+<p>Here&rsquo;s where things get really awesome, remember how I mentioned that Google would scan your pictures so their Artificial Intelligence gets better? &nbsp;So guess who gets to take advantage of that? &nbsp; That&rsquo;s right,&nbsp;<strong>you</strong>&nbsp;do! &nbsp;Notice the Search box above your photos, go ahead and search your images for anything you might have. &nbsp;I&rsquo;ll search for &lsquo;dogs&rsquo; and lets see what Google brings back &ndash;</p>
+<p><img alt="" height="auto" src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388086248_dogs.png?alt=media&amp;token=05d85fb4-a3fd-446b-83aa-d5fbd08ce1d4" width="80%" /></p>
+<p>Of all the pictures that are immediately displayed only three&nbsp;of them don&rsquo;t actually have dogs and of those two are of my son on a skating rink floor&nbsp;and a third is my daughter in a cat costume. &nbsp;Notice that dogs are displayed in all the other pictures &ndash; real dogs, fake dogs, kids in dog costumes, big dogs, little dogs. &nbsp;If I were to search for trees I would have similar results. &nbsp;I could also search for a day, a person, an event, etc. &nbsp;This AI is really amazing and only gets better as time goes on and more photos are scanned. &nbsp;To view any of the photos in full screen, simply click on the photo (you probably already found that option).</p>
+<p>&nbsp;</p>
+<p><strong>Download Photos</strong></p>
+<p>The last item to cover is to download your photos to your computer or phone. &nbsp;This is easily done simply select one or more pictures by hovering over the picture until you see the checkmark appear at the top left of the photo, you&rsquo;ll click the checkmark and it will turn blue.</p>
+<p>Do this with as many photos as you like and then click the&nbsp;<img alt="overflow" height="auto" src="https://i2.wp.com/www.bighelment.com/wp-content/uploads/2016/10/overflow.png?zoom=1.100000023841858&amp;resize=60%2C50" width="80%" />overflow button in the top right of the screen, this will bring up the overflow menu and you can select to download the photo.</p>
+<p><img alt="" height="auto" src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388099158_download.png?alt=media&amp;token=be4e77f6-10b2-4b54-a570-ca3b8dd13f64" width="80%" /><img alt="" height="auto" src="https://firebasestorage.googleapis.com/v0/b/brilliant-torch-4466.appspot.com/o/images%2F1523388094044_check.png?alt=media&amp;token=8ab0afa8-edab-46e9-9ef5-3b632854d5a7" width="80%" /></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2006 - 2024 Pillar Consulting LLC
+    </div>
+  
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+    
+    
+    
+      
+      
+    
+    <a href="https://cyberpunk.earth/@headpunk" target="_blank" rel="noopener me" title="cyberpunk.earth" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M433 179.11c0-97.2-63.71-125.7-63.71-125.7-62.52-28.7-228.56-28.4-290.48 0 0 0-63.72 28.5-63.72 125.7 0 115.7-6.6 259.4 105.63 289.1 40.51 10.7 75.32 13 103.33 11.4 50.81-2.8 79.32-18.1 79.32-18.1l-1.7-36.9s-36.31 11.4-77.12 10.1c-40.41-1.4-83-4.4-89.63-54a102.54 102.54 0 0 1-.9-13.9c85.63 20.9 158.65 9.1 178.75 6.7 56.12-6.7 105-41.3 111.23-72.9 9.8-49.8 9-121.5 9-121.5zm-75.12 125.2h-46.63v-114.2c0-49.7-64-51.6-64 6.9v62.5h-46.33V197c0-58.5-64-56.6-64-6.9v114.2H90.19c0-122.1-5.2-147.9 18.41-175 25.9-28.9 79.82-30.8 103.83 6.1l11.6 19.5 11.6-19.5c24.11-37.1 78.12-34.8 103.83-6.1 23.71 27.3 18.4 53 18.4 175z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

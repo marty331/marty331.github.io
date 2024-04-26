@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#raspberry-pi-setup" class="md-skip">
+        <a href="#jellyfin-on-a-raspberry-pi-4-the-complete-setup" class="md-skip">
           Skip to content
         </a>
       
@@ -266,6 +266,26 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optout/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Opt-out
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -278,10 +298,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -292,8 +312,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Blogs
           </label>
@@ -459,6 +479,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -486,6 +508,8 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">
@@ -893,6 +917,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -966,9 +992,9 @@
                   
 
 
-<h1>Jellyfin on a Raspberry Pi 4 - The Complete Setup</h1>
-<p><img alt="header" src="../../assets/images/jellyfin/music_guide.jpg" />
-<br>If you're like me, you have tons of music stored in Google Play Music.  So the September 2020 shutdown of Google Play Music was a real bummer to me.  Google allowed me to move my music to YouTube Music, but let's be real, YouTube Music is subpar at best.  I carry an Android smartphone, and on Android the YouTube Music app stops playing when you lock the screen unless you are paying customer.  So there's no going for a run with music, there's no walking the dogs with music, there's no driving with music, etc.  You get the picture.</p>
+<h1 id="jellyfin-on-a-raspberry-pi-4-the-complete-setup">Jellyfin on a Raspberry Pi 4 - The Complete Setup</h1>
+<p>![header](../assets/images/jellyfin/music_guide.jpg)<br />
+If you're like me, you have tons of music stored in Google Play Music.  So the September 2020 shutdown of Google Play Music was a real bummer to me.  Google allowed me to move my music to YouTube Music, but let's be real, YouTube Music is subpar at best.  I carry an Android smartphone, and on Android the YouTube Music app stops playing when you lock the screen unless you are paying customer.  So there's no going for a run with music, there's no walking the dogs with music, there's no driving with music, etc.  You get the picture.</p>
 <p>So I set out on a quest to find a replacement.  A lot of my friends really like Plex but I've tried Plex before and I didn't love it.  I spend a couple of weekends setting up Nextcloud but the music player was just not good, no, it is bad.  I had almost given up, then as I was listening to the Linux Unplugged podcast one afternoon in Dec they mentioned Jellyfin.  I thought to myself, could this be it?  Could this work?  </p>
 <p>I'm happy to report that this is the BEST I've seen so far and as of now I have it fully working.  I have Jellyfin running on my Raspberry Pi 4, with approximately 78 GB of music.  It is exposed via fully qualified domain so that I can listen from my phone or computer anywhere in the world with an internet connection.  It works on my browser, has and Android app and iOS app.  I have set up accounts for myself, my wife and my kids, so everyone can create their own playlists.</p>
 <p>Without further ado, let's hop in and go through the setup!</p>
@@ -1014,8 +1040,8 @@ http://&lt;raspberry_pi_ip_address&gt;:8096
 <p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-22-at-92342-pm.png" /></p>
 <p>As I mentioned this will very greatly depending on the router that you have but the process should be somewhat similar.  You can Google how to forward ports on your specific router and get this step done.</p>
 <h2 id="cloudflare-dns-setup">Cloudflare DNS Setup</h2>
-<p>At this point we will setup Cloudflare to route traffic to your IP address.  You will need a custom domain for this part.  If you don't have one already you can purchase a custome domain from many different sources.  I've used several domain registars in the past but currently I prefer Google Domains, <a href="https://domains.google.com/">https://domains.google.com/</a>. Pick one that works for you and get it setup.  You will need access to the domain during this step.</p>
-<p>After you have your domain registered then we'll setup Cloudflare's DNS service.  You will need to create an account on Cloudflare, the free version works just fine for what we need to do.  So navigate to <a href="https://dash.cloudflare.com/sign-up">Cloudflare</a> and create an account.</p>
+<p>At this point we will setup Cloudflare to route traffic to your IP address.  You will need a custom domain for this part.  If you don't have one already you can purchase a custome domain from many different sources.  I've used several domain registars in the past but currently I prefer Google Domains, <a href="https://domains.google.com/" title="https://domains.google.com/">https://domains.google.com/</a>. Pick one that works for you and get it setup.  You will need access to the domain during this step.</p>
+<p>After you have your domain registered then we'll setup Cloudflare's DNS service.  You will need to create an account on Cloudflare, the free version works just fine for what we need to do.  So navigate to <a href="https://dash.cloudflare.com/sign-up" title="Cloudflare">Cloudflare</a> and create an account.</p>
 <p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-22-at-94530-pm.png" /></p>
 <p>Next you'll need to enter your domain name, such as example.com (you'll not enter in http://, just the domain name).</p>
 <p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-22-at-94820-pm.png" /></p>
@@ -1037,8 +1063,6 @@ http://&lt;raspberry_pi_ip_address&gt;:8096
 sudo apt-get install -y libffi-dev libssl-dev
 sudo apt-get install -y python3 python3-pip
 sudo pip3 -v install docker-compose
-
-
 </code></pre>
 <p>After the dependenices are installed then we'll create a directory for nginx and a config file.  Here are the commands:</p>
 <pre><code>
@@ -1111,7 +1135,7 @@ docker ps
 <pre><code>
 http://&lt;raspberry_pi_ip_address&gt;:81
 </code></pre>
-<p>You'll be presented with the login screen for Nginx Proxy Manager.  The default email address is admin@example.com and the password is changeme.  Login with those credentials and then you can change them to your actual email and create a password.</p>
+<p>You'll be presented with the login screen for Nginx Proxy Manager.  The default email address is <a href="mailto:admin@example.com" title="admin@example.com">admin@example.com</a> and the password is changeme.  Login with those credentials and then you can change them to your actual email and create a password.</p>
 <p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-22-at-105333-pm.png" /></p>
 <p>After you have your account squared away, you'll need to setup the Proxy.  Click on Hosts &gt; Proxy Hosts &gt; Add Proxy Host.</p>
 <p><img alt="" src="../../assets/images/jellyfin/screen-shot-2021-01-22-at-105859-pm.png" /></p>
